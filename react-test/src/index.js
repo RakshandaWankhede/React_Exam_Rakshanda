@@ -15,6 +15,7 @@ const history =createBrowserHistory();
 ReactDOM.render(
         <Provider store={store}>
             <Router history={history}>
+                <Header></Header>
                 <Switch>
                     <Route exact path="/login" component={Login} />
                     <Route path="/ProductListing" component={ProductListing} />

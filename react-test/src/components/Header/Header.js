@@ -1,30 +1,19 @@
 import React from 'react';
-import {Redirect } from 'react-router-dom'
+import {Link} from "react-router-dom";
 import Grid from '@material-ui/core/Grid'
 
 
 const Header =()=>{
-    const LoginRedirect =()=>{
-        console.log("login");
-        return (
-            <Redirect to="/login" />  
-        )
-    }
-    const ListingRedirect =()=>{
-        console.log("ProductListing");
-        return (
-            <Redirect to="/login" />  
-        )
-    }
+   
     return(
-        <Grid container spacing={3}>
-            <Grid item xs={6}  onClick={LoginRedirect}>
-                Login
+        <Grid xs={12} style={{backgroundColor:"#3f51b5",height: "30px"}}>
+            <Grid xs={6} style={{display:"inline-block", width:"50%"} }>
+                <Link to="/login" style={{color:"white", fontWeight:"bold" ,textDecoration: "none"}}>Login</Link>
             </Grid>
-            <Grid item xs={6} onClick={ListingRedirect} >
-                Product Listing
+            <Grid xs={6} style={{display:"inline-block", width:"50%"}}>
+                <Link to="/ProductListing" style={{color:"white", fontWeight:"bold" ,textDecoration: "none" }}>Product Listing</Link>
             </Grid>
-        </Grid>
+        </Grid>      
     )
 
 }
