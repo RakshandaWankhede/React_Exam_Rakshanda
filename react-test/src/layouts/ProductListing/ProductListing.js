@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 const ProductListing =()=>{
     const classes = useStyles();
     const [searchText,setSearchText] = useState('');
+    const [isRedirect,setIsRedirect] = useState(false);
     const dispatch = useDispatch();
     const products = useSelector(state=>state.productSearchReducer.products);
     const product = useSelector(state=>state.productReducer.product);
@@ -39,6 +40,7 @@ const ProductListing =()=>{
     //     dispatch(searchProducts(body));
 
     // },[])
+    
  
     const clickHandler = ()=>{
         const body={
@@ -52,13 +54,14 @@ const ProductListing =()=>{
             "range": []
         }
         dispatch(searchProducts(body));
+       
     }
     const changeHandler = (e)=>{
         setSearchText(e.target.value);
     }
     return(
         <div>
-            {product ? <Redirect  from= '/login' to="/Product" /> : false}
+            {isRedirect ? <Redirect  from= '/login' to="/Product" /> : false}
             <Grid container spacing={3}>
             <Grid item xs={12} className={classes.root}>
                 <TextField
@@ -83,6 +86,7 @@ const ProductListing =()=>{
                     image={item.compositeProducts[0].EProductMedia.smallURI} 
                     listPrice={item.compositeProducts[0].priceEntry.listPrice}
                     pId={item.sfid}
+                    setIsRedirect = {setIsRedirect}
                     ></Product>
                 })}
                 </Container>

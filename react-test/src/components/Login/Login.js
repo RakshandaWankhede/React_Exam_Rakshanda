@@ -13,21 +13,25 @@ import {Redirect } from 'react-router-dom'
 import loginStyle from './loginStyle'
 import {loginToSite} from '../../actions/loginAction'
 import { useDispatch, useSelector } from 'react-redux';
+import { withToastManager, useToasts } from 'react-toast-notifications'
+
 
 
 const useStyles = makeStyles(loginStyle);
 
-export default function Login() {
+const Login =()=>{
   const classes = useStyles();
   const [email,setEmail] = useState('');
   const [password,setPassword]  = useState('');
   const dispatch = useDispatch();
   const userData = useSelector(state=>state.loginReducer.userData);
- 
+  const error = useSelector(state=>state.loginReducer.error);
+  const { addToast } = useToasts(); 
 
   useEffect(()=>{
-   
-  },[userData])
+      if(error)
+   { addToast(error, { appearance: 'error', autoDismiss: true });}
+  },[error,addToast])
   const handleSubmit =()=>{
       const data = {
         "username":email,
@@ -95,3 +99,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default withToastManager(Login);

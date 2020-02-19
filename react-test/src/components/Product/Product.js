@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import {getProduct} from "../../actions/productAction"
 import { Grid } from '@material-ui/core';
 import { useDispatch} from 'react-redux';
+import {browserHistory}  from 'react-router'
 
 const useStyles = makeStyles({
   root: {
@@ -34,10 +35,12 @@ const useStyles = makeStyles({
 
 export default function Product(props) {
   const classes = useStyles();
-  const {pName ,image,listPrice,pId} = props;
+  const {pName ,image,listPrice,pId , setIsRedirect} = props;
   const dispatch = useDispatch();
   const clickHandler =()=>{
       dispatch(getProduct(pId));
+      setIsRedirect(true);
+
   }
  
 

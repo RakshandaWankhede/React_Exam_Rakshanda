@@ -1,8 +1,9 @@
 
-import { USER_DATA_STORE } from '../actions/actionTypes'
+import { USER_DATA_STORE ,LOGIN_FAILURE } from '../actions/actionTypes'
 
 const initialState ={
-    userData : null
+    userData : null,
+    error : null    
 }
 export default function loginReducer(state = initialState, action) {
     switch (action.type) {
@@ -12,6 +13,12 @@ export default function loginReducer(state = initialState, action) {
           ...state,
           userData : action.payload.data.access_token,
         };  
+      case LOGIN_FAILURE:
+        return {
+          ...state,
+          error : "Invalid Credential",
+        };
+
       default:
         return state;
     }

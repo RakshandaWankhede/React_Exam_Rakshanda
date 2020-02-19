@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import Typography from '@material-ui/core/Typography';
-
+import { withToastManager, useToasts } from 'react-toast-notifications'
 
 const useStyles = makeStyles(theme => ({
     main:{
@@ -46,12 +46,13 @@ const ProductDetail =()=>{
     const classes = useStyles();
     const token = useSelector(state=>state.loginReducer.userData);
     const product = useSelector(state=>state.productReducer.product)
+    const { addToast } = useToasts();
     if(!token){
+        addToast("Please login", { appearance: 'error', autoDismiss: true })
         return(
             <Redirect  from= '/Product' to="/login" />
         )
     }
-    console.log(product);
     return(
     <Container className={classes.main}> 
        {product ? <Card className={classes.root}>
@@ -82,4 +83,4 @@ const ProductDetail =()=>{
     </Container>
     )
 }
-export default ProductDetail
+export default withToastManager(ProductDetail);
